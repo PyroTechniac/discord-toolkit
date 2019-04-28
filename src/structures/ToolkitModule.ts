@@ -1,12 +1,14 @@
 import { Category } from '../util/Category';
+import { ToolkitHandler } from './ToolkitHandler';
+import { ToolkitClient } from './ToolkitClient';
 
 export class ToolkitModule {
     public id: string;
     public categoryID: string;
     public category: Category = null;
     public filepath: string = null;
-    public client: any = null;
-    public handler: any = null;
+    public client: ToolkitClient = null;
+    public handler: ToolkitHandler = null;
     public constructor(id: string, { category = 'default' }: ToolkitModuleOptions = {}) {
         this.id = id;
 

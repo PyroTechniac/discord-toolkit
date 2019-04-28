@@ -1,3 +1,6 @@
+import { ToolkitHandlerOptions } from "../structures/ToolkitHandler";
+import { ToolkitModule } from "../structures/ToolkitModule";
+
 export const ArgumentMatches = {
     PHRASE: 'phrase',
     FLAG: 'flag',
@@ -80,3 +83,12 @@ export const BuiltInReasons = {
     GUILD: 'guild',
     DM: 'dm'
 };
+
+export type LoadPredicate = (filepath: string) => boolean;
+
+export const ToolkitHandlerDefaults: ToolkitHandlerOptions = {
+    classToHandle: ToolkitModule,
+    extensions: ['.js', '.json', '.ts'],
+    automateCategories: false,
+    loadFilter: (() => true)
+}

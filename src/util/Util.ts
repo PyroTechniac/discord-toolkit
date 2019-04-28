@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+import { Constructable } from 'discord.js';
 
 export interface AnyObj {
     [k: string]: any;
@@ -68,4 +69,48 @@ export class Util {
         }
         return null;
     }
+
+    public static deepClone(source: any): any {
+        if (source === null || Util.isPrimitive(source)) return source;
+        if (Array.isArray(source)) {
+            const output = [];
+            for (const value of source) output.push(Util.deepClone(value));
+            return output;
+        }
+        if (Util.isObject(source)) {
+            const output: AnyObj = {};
+            for (const [key, value] of Object.entries(source)) output[key] = Util.deepClone(value);
+            return output;
+        }
+        if (source instanceof Map) {
+            const output = new (source.constructor() as Constructable<Map<any, any>>)();
+            for (const [key, value] of source.entries()) output.set(key, Util.deepClone(value));
+            return output;
+        }
+        if (source instanceof Set) {
+            const output = new (source.constructor() as Constructable<Set<any>>)();
+            for (const value of source.values()) output.add(Util.deepClone(value));
+            return output;
+        }
+        return source;
+    }
+
+    public static mergeDefault<T>(def: AnyObj, given: AnyObj): T {
+        if (!given) return Util.deepClone(def);
+        for (const key in def) {
+            if (typeof given[key] === 'undefined') given[key] = Util.deepClone(def[key]);
+            else if (Util.isObject(given[key])) given[key] = Util.mergeDefault(def[key], given[key]);
+        }
+        return given as any;
+    }
+
+    public static isObject(input: any): input is Constructable<any> {
+        return input && input.constructor === Object;
+    }
+
+    public static isPrimitive(input: any): input is string | boolean | bigint | number {
+        return Util.PRIMITIVE_TYPES.includes(typeof input);
+    }
+
+    public static PRIMITIVE_TYPES = ['string', 'bigint', 'boolean', 'number']
 }
