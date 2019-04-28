@@ -1,0 +1,58 @@
+{
+    "name": "discord-toolkit",
+    "author": "Gryffon Bellish",
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
+    "license": "MIT",
+    "scripts": {
+        "build": "npx tsc",
+        "prebuild": "npm run lint:fix",
+        "lint": "npx eslint src --ext .ts",
+        "lint:fix": "npx eslint src --ext .ts --fix",
+        "install": "npx tsc"
+    },
+    "dependencies": {
+        "@types/node": "^11.13.8",
+        "@types/ws": "^6.0.1",
+        "discord.js": "discordjs/discord.js",
+        "typescript": "^3.4.5"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^1.7.0",
+        "@typescript-eslint/parser": "^1.7.0",
+        "eslint": "^5.16.0",
+        "eslint-config-marine": "^2.0.0"
+    },
+    "optionalDependencies": {},
+    "peerDependencies": {
+        "discord.js": "discordjs/discord.js"
+    },
+    "eslintConfig": {
+        "extends": "marine/node",
+        "rules": {
+            "@typescript-eslint/indent": [
+                "error",
+                4,
+                "spaces"
+            ],
+            "quotes": [
+                "error",
+                "single"
+            ],
+            "multiline-ternary": "off",
+            "radix": "off",
+            "@typescript-eslint/promise-function-async": "off",
+            "promise/prefer-await-to-callbacks": "off",
+            "@typescript-eslint/no-extraneous-class": "off",
+            "@typescript-eslint/no-object-literal-type-assertion": "off",
+            "@typescript-eslint/no-parameter-properties": "off",
+            "no-useless-constructor": "off",
+            "@typescript-eslint/no-use-before-define": "off",
+            "no-use-before-define": "off",
+            "promise/prefer-await-to-then": "off"
+        }
+    },
+    "eslintIgnore": [
+        "lib/**"
+    ]
+}

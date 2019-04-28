@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib",
+        "target": "esnext",
+        "module": "commonjs",
+        "declaration": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "types": [
+            "discord.js",
+            "ws",
+            "node"
+        ]
+    },
+    "include": [
+        "src"
+    ]
+}
